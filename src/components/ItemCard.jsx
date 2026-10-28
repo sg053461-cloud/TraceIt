@@ -134,14 +134,54 @@ export default function ItemCard({ item, onClick }) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              background: 'rgba(0,0,0,0.25)',
+              flexDirection: 'column',
+gap: '8px',
+background: 'rgba(0,0,0,0.25)',
               color: '#fff',
               fontSize: '11px',
               fontWeight: 600,
               textShadow: '0 1px 3px rgba(0,0,0,0.6)',
             }}
           >
-            🔒 Details Protected
+            <span>🔒 Details Protected</span>
+
+            {claim?.blocked ? (
+              <span
+                role="status"
+                style={{
+                  background: 'rgba(220, 38, 38, 0.9)',
+                  color: '#fff',
+                  padding: '4px 10px',
+                  borderRadius: 'var(--radius-full)',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  textShadow: 'none',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.35)',
+                }}
+              >
+                🚫 Permanently Blocked
+              </span>
+            ) : claim?.locked ? (
+              <span
+                role="timer"
+                aria-live="off"
+                aria-label={`Try again in ${lockMM} minutes ${lockSS} seconds`}
+                style={{
+                  background: 'rgba(180, 83, 9, 0.92)',
+                  color: '#fff',
+                  padding: '4px 12px',
+                  borderRadius: 'var(--radius-full)',
+                  fontSize: '13px',
+                  fontWeight: 800,
+                  fontVariantNumeric: 'tabular-nums',
+                  letterSpacing: '0.04em',
+                  textShadow: 'none',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.35)',
+                }}
+              >
+                ⏳ Try again in {lockMM}:{lockSS}
+              </span>
+            ) : null}
           </div>
         )}
       </div>
